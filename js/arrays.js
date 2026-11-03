@@ -1,4 +1,4 @@
-const PALETTE =  ['#FF5733', '#33FF57', '#3357FF', '#F333FF']
+const PALETTE =  ['#FF5733', '#33FF57', '#3357FF', '#F333FF', '#33FFF5', '#F5FF33', '#FF33A1', '#A133FF', '#33FFA1', '#FFA133'];
 //const: son los mismos valores y no van a cambiar a lo largo del programa.
 const RADIO= 300;
 let half_height = window.innerHeight / 2; //half_height: es un valor que se puede cambiar a lo largo del programa. hace que la onda se mueva a lo largo del tiempo.
@@ -12,10 +12,10 @@ function setup() {
 }
 
 function draw() {
-    background(PALETTE[0]);
+    background(PALETTE[7]);
     noFill();
-    strokeWeight(2);
-    stroke(PALETTE[2]);
+    strokeWeight(5);
+    stroke(PALETTE[4]);
     for (let x = 0; x < width; x++){ //ciclos for: iteran sobre un rango de valores. en este caso, desde 0 hasta el ancho de la ventana.
         let angle = (x * frequency) + offset;
         //TAU = 2PI
