@@ -1,10 +1,6 @@
 let song;
 let amplitude;
 
-function preload(){
-    song = loadSound("./sound/ditf.mp3");
-}
-
 async function setup(){
     createCanvas(windowWidth, windowHeight);
     song = await loadSound("./sound/ditf.mp3");
@@ -20,6 +16,9 @@ function draw(){
      background(0);
      if (!amplitude) return;
      const level = amplitude.getLevel();
-     const size = map(level, 0, 0.3, 50, min(width, heigh),true);
+     const size = level *100 +50;
+     const color = level * 125 + 125;
+     const weight = level * 5 + .5;
+     fill(color);
      circle(width / 2, height / 2, size);
 }
