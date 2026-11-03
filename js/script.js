@@ -6,7 +6,7 @@ function preload(){
 }
 
 async function setup(){
-    createCanvas(windowWidth, widnowHeight);
+    createCanvas(windowWidth, windowHeight);
     song = await loadSound("./sound/ditf.mp3");
     amplitude = new p5.Amplitude();
     song.connect(amplitude);
