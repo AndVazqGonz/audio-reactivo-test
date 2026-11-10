@@ -1,15 +1,15 @@
 export default class Circle { //export default es para exportar la clase, para que se pueda usar en otros archivos.
-    constructor(){ //inicializa la clase, se definen las propiedades iniciales de la clase.
+    constructor(props = {}){ //inicializa la clase, se definen las propiedades iniciales de la clase.
         //ENCAPSULA A LAS VARIABLES, es decir, las variables solo se pueden usar dentro de la clase, no se pueden usar fuera de la clase.
         //this.color = "#00ff00"; .el color es un string, se puede cambiar a cualquier color que se quiera.
-        this.fill = null; //Null es un valor que no tiene nada, es como un valor vacío.
+        this.fill = props.fill || null; //Null es un valor que no tiene nada, es como un valor vacío.
         //se puede ocupar null o false, pero null es más específico.
-        this.stroke = "#b36d7a";
-        this.strokeWeight = 2;
-        this.radio = 20;
-        this.x = 50;
-        this.y = 40;
-        this.alpha = 255;
+        this.stroke = props.stroke || "#b36d7a";
+        this.strokeWeight = props.strokeWeight || 2;
+        this.radio = props.radio || 20;
+        this.x = props.x || 50;
+        this.y = props.y || 40;
+        this.alpha = props.alpha || 255;
         //estos son valores inciiales, pero se pueden cambiar en cualquier momento.
     }
 
