@@ -10,17 +10,31 @@ export default class Circle { //export default es para exportar la clase, para q
         this.x = props.x || 50;
         this.y = props.y || 40;
         this.alpha = props.alpha || 255;
+        this.speed_x= props.speed_x || .1;
+        this.speed_y= props.speed_y || .1;
+
         //estos son valores inciiales, pero se pueden cambiar en cualquier momento.
     }
 
     resize(){ // estos son en donde se puede modificar los valores al momento de llamarlos 
         this.radio = random(10, 50);
         // si algo no se quiere cambiar, no hay que agregarlo aquí, solo se deja en el constructor.
-        
-        
+    }
+
+    move(){
+        this.x += this.speed_x;
+        this.y += this.speed_y;
+    }
+
+    update(p){
+        this.move();
+        this.checkEdges(p);
+        this.draw(p);
+       
     }
 
     draw(p){
+        this.move();
         if(this.fill ){
             p.fill(this.fill);
         } else {
@@ -35,6 +49,17 @@ export default class Circle { //export default es para exportar la clase, para q
         
         p.strokeWeight(this.strokeWeight);
         p.circle(this.x, this.y, this.radio);
-    
+        this.checkEdges(p);
+    }
+    checkEdges(p){
+        if(this.x < -this.radio){
+            this.x = p.width + this.radio;
+        } else if (this.x > p.width + this.radio){
+            this.x = -this.radio;
+        } else if(this.y < -this.radio ){
+            this.y = p.height + this.radio;
+        } else if (this.y > p.height + this.radio){
+            this.y = -this.radio;
+        }
     }
 }
