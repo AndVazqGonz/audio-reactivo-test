@@ -2,6 +2,7 @@ import Circle from './components/Circle.js'; //las clases se escriben con mauysc
 
 const STARS_COUNTER = 32;
 let stars = [];
+let fft, song;
 
 /*const CIRCLE_A= new Circle({
     x:100, y:100,
@@ -16,8 +17,32 @@ let stars = [];
 //esto es otra instancia */
 
 new p5(p => {
-    p.setup = () => {
+    p.setup = async () => {
         p.createCanvas(p.windowWidth, p.windowHeight);
+        populate();
+        fft = new p5.FFT(STARS_COUNTER);
+        song = await p.loadSound('../sound/ditf.mp3');
+        song.connect(fft);
+    }
+
+    p.draw = () => {
+        p.background(0);
+        const spectrum = fft.analyze();
+        for (let i = 0; i < stars.length; i++){
+            const star = stars[i];
+            const value = spectrum[i] || 0 * 100;
+            star.update(p, value);
+        }
+    }
+
+    p.mousePressed = async () => {
+        if (!song) return;
+        await p.userStartAudio();
+        if (song.isPlaying()) song.pause();
+         else song.play();
+        }
+
+    function populate(){
         for (let i = 0; i < STARS_COUNTER; i++){
             const _circle = new Circle({
                 x: Math.random() * p.width,
@@ -29,15 +54,7 @@ new p5(p => {
             });
             stars.push(_circle);
         }
-    }
-
-    p.draw = () => {
-        p.background(0);
-        for (const star of stars){
-            star.update(p);
-        }
-    }
-});
+    }});
 //instancia: es como el hijo de una clase. resultado de la clase.
 
 //Math random: es de javascript, es una funcion que genera un numero aleatorio entre 0 y 1.

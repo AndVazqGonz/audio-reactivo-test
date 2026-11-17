@@ -6,7 +6,7 @@ export default class Circle { //export default es para exportar la clase, para q
         //se puede ocupar null o false, pero null es más específico.
         this.stroke = props.stroke || "#b36d7a";
         this.strokeWeight = props.strokeWeight || 2;
-        this.radio = props.radio || 15;
+        this.radio = props.radio || 10;
         this.x = props.x || 50;
         this.y = props.y || 40;
         this.alpha = props.alpha || 255;
@@ -26,7 +26,8 @@ export default class Circle { //export default es para exportar la clase, para q
         this.y += this.speed_y;
     }
 
-    update(p){
+    update(p, value = 0){
+        this.radio = this.radio0 * value;
         this.move();
         this.checkEdges(p);
         this.draw(p);
